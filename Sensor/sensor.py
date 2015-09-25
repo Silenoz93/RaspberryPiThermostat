@@ -39,17 +39,16 @@ def read_temp(device_file):
 		equals_pos = lines[1].find('t=');
 	temp_string = lines[1][equals_pos+2:];
 	temp_c = float(temp_string)/1000.0;
-	temp_f = temp_c * 9.0 / 5.0 + 32.0;
-	return (temp_c, temp_f);
+	return (temp_c);
 
 def get_average_temp(device_file):
 	global AVERAGE_COUNT;
 	
-	total_f = 0;
+	total_c = 0;
 	for i in range(0,AVERAGE_COUNT):
-		temp_c, temp_f = read_temp(device_file);
-		total_f += temp_f;
-	return total_f/AVERAGE_COUNT;
+		temp_c = read_temp(device_file);
+		total_c += temp_c;
+	return total_c/AVERAGE_COUNT;
 
 def write_current(temp):
 	global CURRENT_FILE;	
